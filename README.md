@@ -1,1 +1,3 @@
 # AdventOfCode
+
+Solutions for AoC.

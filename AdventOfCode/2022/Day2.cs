@@ -1,62 +1,69 @@
 ﻿using AoC2022.Interfaces;
-using System;
+using BenchmarkDotNet.Attributes;
 using System.Collections.Generic;
 using static AoC2022.Helpers;
 
 namespace AoC2022
 {
-    internal class Day2 : ISolution
+    // [MemoryDiagnoser]
+    [SimpleJob]
+    public class Day2 : ISolution
     {
         private readonly InputTypes _inputTypes;
         private string[] _input;
 
-        public Day2(InputTypes inputTypes)
+        public Day2(InputTypes inputTypes = InputTypes.Full)
         {
             _inputTypes = inputTypes;
             ProcessInput();
         }
 
+        [Benchmark]
         public void ProcessInput()
         {
             _input = ReadInputFromDataFolder("Day2", _inputTypes);
         }
 
-        public void PartOne()
+        #region first version
+
+        [Benchmark]
+        public int PartOne()
         {
             var score = 0;
             for (int i = 0; i < _input.Length; i++)
             {
                 var choiceInRound = _input[i].Split(' ');
-                var opponentPick = GetPickToEnum(choiceInRound[0]);
-                var playerPick = GetPickToEnum(choiceInRound[1]);
-                score += GetRoundResult(opponentPick, playerPick, GameType.Normal);
+                var opponentPick = GetHandpickToEnum(choiceInRound[0]);
+                var playerPick = GetHandpickToEnum(choiceInRound[1]);
+                score += GetRoundScore(opponentPick, playerPick, GameType.Normal);
             }
 
-            Console.WriteLine($"Day 2 Part #1: {score}");
+            return score;
         }
 
-        public void PartTwo()
+        [Benchmark]
+        public int PartTwo()
         {
             var score = 0;
             for (int i = 0; i < _input.Length; i++)
             {
                 var choiceInRound = _input[i].Split(' ');
-                var opponentPick = GetPickToEnum(choiceInRound[0]);
-                var playerPick = GetPickToEnum(choiceInRound[1]);
-                score += GetRoundResult(opponentPick, playerPick, GameType.Fixed);
+                var opponentPick = GetHandpickToEnum(choiceInRound[0]);
+                var playerPick = GetHandpickToEnum(choiceInRound[1]);
+                score += GetRoundScore(opponentPick, playerPick, GameType.Fixed);
             }
 
-            Console.WriteLine($"Day 2 Part #2: {score}");
+            return score;
         }
 
-        private int GetRoundResult(Hand opponent, Hand player, GameType gameType)
+        private int GetRoundScore(Hand opponent, Hand player, GameType gameType)
         {
             Result result;
 
             switch (gameType)
             {
                 case GameType.Normal:
-                    result = GetNormalGameResult(opponent, player);
+                    result = GetHandpickResult(opponent, player);
                     break;
                 default:
                     var fixedGameResult = new Dictionary<Hand, Result>()
@@ -67,17 +74,17 @@ namespace AoC2022
                      };
 
                     result = fixedGameResult[player];
-                    player = GetFixedGamePick(opponent, result);
+                    player = GetOutcomeFromOpponentHandpick(opponent, result);
                     break;
-            }  
+            }
 
-            var roundScore = GetRoundScore(result);
-            roundScore += GetPickScore(player);
+            var roundScore = GetRoundResultScore(result);
+            roundScore += GetHandpickScore(player);
 
             return roundScore;
         }
 
-        private Result GetNormalGameResult(Hand opponent, Hand player)
+        private Result GetHandpickResult(Hand opponent, Hand player)
         {
             var gameTable = new Dictionary<(Hand, Hand), Result>()
             {
@@ -97,7 +104,7 @@ namespace AoC2022
             return gameTable[(opponent, player)];
         }
 
-        private Hand GetFixedGamePick(Hand pick, Result result)
+        private Hand GetOutcomeFromOpponentHandpick(Hand pick, Result result)
         {
             Hand nextMove;
 
@@ -133,7 +140,7 @@ namespace AoC2022
         }
 
 
-        private Hand GetPickToEnum(string pick)
+        private Hand GetHandpickToEnum(string pick)
         {
             var pickToEnum = new Dictionary<string, Hand>()
              {
@@ -149,7 +156,7 @@ namespace AoC2022
             return pickToEnum[pick];
         }
 
-        private int GetPickScore(Hand pick)
+        private int GetHandpickScore(Hand pick)
         {
             var pickWorth = new Dictionary<Hand, int>()
              {
@@ -161,7 +168,7 @@ namespace AoC2022
             return pickWorth[pick];
         }
 
-        private int GetRoundScore(Result result)
+        private int GetRoundResultScore(Result result)
         {
             switch (result)
             {
@@ -193,5 +200,80 @@ namespace AoC2022
             Paper,
             Scissor,
         }
+
+        #endregion
+
+        #region Optimized version
+
+        [Benchmark]
+        public int PartOneOptimized()
+        {
+            var score = 0;
+            for (int i = 0; i < _input.Length; i++)
+            {
+                score += GetRoundScoreOptimized(_input[i]);
+            }
+
+            return score;
+        }
+
+        [Benchmark]
+        public int PartTwoOptimized()
+        {
+            var score = 0;
+            for (int i = 0; i < _input.Length; i++)
+            {
+                score += GetRoundScoreFixedOutcomeOptimzed(_input[i]);
+            }
+
+            return score;
+        }
+
+        // note: can be further optimized by precalculating the total points -> pick + outcome
+        public int Rock = 1, Paper = 2, Scissor = 3;
+        public int Win = 6, Draw = 3;
+
+        private int GetRoundScoreOptimized(string input)
+        {
+            var possibleOutcome = new Dictionary<string, int>()
+            {
+                { "A X", Rock + Draw},      // rock vs rock + draw
+                { "A Y", Paper + Win},      // rock vs paper + win
+                { "A Z", Scissor},          // rock vs scissor + lose
+                                            
+                { "B Y", Paper + Draw},     // paper vs paper + draw
+                { "B Z", Scissor + Win},    // paper vs scissor + win
+                { "B X", Rock},             // paper vs rock + lose                    
+                    
+                { "C Z", Scissor + Draw},   // scissor vs scissor + draw  
+                { "C X", Rock + Win},       // scissor vs rock + win         
+                { "C Y", Paper},            // scissor vs paper + lose
+            };
+
+            return possibleOutcome[input];
+        }
+
+        private int GetRoundScoreFixedOutcomeOptimzed(string input)
+        {
+            //X lose, Y draw, Z  win
+            var possibleOutcome = new Dictionary<string, int>()
+            {
+                { "A X", Scissor},
+                { "B X", Rock},
+                { "C X", Paper},
+
+                { "A Y", Rock + Draw},
+                { "B Y", Paper + Draw},
+                { "C Y", Scissor + Draw},
+
+                { "A Z", Paper + Win},
+                { "B Z", Scissor + Win},
+                { "C Z", Rock + Win},
+            };
+
+            return possibleOutcome[input];
+        }
+
+        #endregion
     }
 }

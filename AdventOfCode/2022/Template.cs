@@ -1,38 +1,38 @@
 ﻿using AoC2022.Interfaces;
+using BenchmarkDotNet.Attributes;
 using System;
 using static AoC2022.Helpers;
 
 namespace AoC2022
 {
+    // [MemoryDiagnoser]
+    // [SimpleJob]
     internal class Template : ISolution
     {
         private readonly InputTypes _inputTypes;
         private string[] _input;
 
-        public Template(InputTypes inputTypes)
+        public Template(InputTypes inputTypes = InputTypes.Full)
         {
             _inputTypes = inputTypes;
             ProcessInput();
         }
 
+        [Benchmark]
         public void ProcessInput()
         {
             _input = ReadInputFromDataFolder("DayX", _inputTypes);
-
-            throw new NotImplementedException();            
         }
 
-        public void PartOne()
+        [Benchmark]
+        public int PartOne()
         {
-            Console.WriteLine($"Day x Part #1:");
-
             throw new NotImplementedException();
         }
 
-        public void PartTwo()
+        [Benchmark]
+        public int PartTwo()
         {
-            Console.WriteLine($"Day x Part #2:");
-
             throw new NotImplementedException();
         }
     }

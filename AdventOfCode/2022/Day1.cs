@@ -1,29 +1,30 @@
 ﻿using AoC2022.Interfaces;
-using System;
+using BenchmarkDotNet.Attributes;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using static AoC2022.Helpers;
 
 namespace AoC2022
 {
-    internal class Day1 : ISolution
+    //[MemoryDiagnoser]
+    [SimpleJob]
+    public class Day1 : ISolution
     {
         private readonly InputTypes _inputTypes;
         private string[] _input;
         private Dictionary<int, int> _elvesWithTotalCalories = new Dictionary<int, int>();
-
-        public Day1(InputTypes inputType)
+  
+        public Day1(InputTypes inputType = InputTypes.Full)
         {
             _inputTypes = inputType;
             ProcessInput();
         }
 
+        [Benchmark]
         public void ProcessInput()
         {
             _input = ReadInputFromDataFolder("Day1", _inputTypes);
-            int total = 0;           
+            int total = 0;
 
             for (int i = 0; i < _input.Length; i++)
             {
@@ -40,23 +41,29 @@ namespace AoC2022
             }
         }
 
-        public void PartOne()
+        #region first version
+
+        [Benchmark]
+        public int PartOne()
         {
             var topX = 1;
             var topXCalories = GetTopElvesWithCalories(_elvesWithTotalCalories, topX);
             var highestAmountOfCalories = GetTotalCalories(topXCalories);
 
-            Console.WriteLine($"Day 1 Part #1: {highestAmountOfCalories}");
+            return highestAmountOfCalories;
         }
 
-        public void PartTwo()
+        [Benchmark]
+        public int PartTwo()
         {
             var topX = 3;
             var topXCalories = GetTopElvesWithCalories(_elvesWithTotalCalories, topX);
             var highestAmountOfCalories = GetTotalCalories(topXCalories);
 
-            Console.WriteLine($"Day 1 Part #2: {highestAmountOfCalories}");
+            return highestAmountOfCalories;
         }
+
+
 
         private int GetTotalCalories(Dictionary<int, int> groups)
         {
@@ -67,5 +74,7 @@ namespace AoC2022
         {
             return groups.OrderByDescending(o => o.Value).Take(top).ToDictionary(k => k.Key, v => v.Value);
         }
+
+        #endregion
     }
 }

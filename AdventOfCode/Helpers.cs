@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AoC2022
 {
-    internal static class Helpers
+    public static class Helpers
     {
         public static string DataPath = $"{Directory.GetCurrentDirectory()}\\Data";
 
@@ -53,6 +49,6 @@ namespace AoC2022
             Full,
             [Description("Alternative input")]
             Alternative
-        }
+        }  
     }
 }

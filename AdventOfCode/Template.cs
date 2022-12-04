@@ -3,7 +3,7 @@ using BenchmarkDotNet.Attributes;
 using System;
 using static AoC2022.Helpers;
 
-namespace AoC2022
+namespace AdventOfCode
 {
     // [MemoryDiagnoser]
     // [SimpleJob]
@@ -21,7 +21,7 @@ namespace AoC2022
         [Benchmark]
         public void ProcessInput()
         {
-            _input = ReadInputFromDataFolder("DayX", _inputTypes);
+            _input = ReadInputFromDataFolder(@"2022\Input\Day1", _inputTypes);
         }
 
         [Benchmark]

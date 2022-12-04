@@ -23,7 +23,7 @@ namespace AoC2022
         [Benchmark]
         public void ProcessInput()
         {
-            _input = ReadInputFromDataFolder("Day1", _inputTypes);
+            _input = ReadInputFromDataFolder(@"2022\Input\Day1", _inputTypes);
             int total = 0;
 
             for (int i = 0; i < _input.Length; i++)

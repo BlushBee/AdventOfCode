@@ -21,7 +21,7 @@ namespace AoC2022
         [Benchmark]
         public void ProcessInput()
         {
-            _input = ReadInputFromDataFolder("Day2", _inputTypes);
+            _input = ReadInputFromDataFolder(@"2022\Input\Day2", _inputTypes);
         }
 
         #region first version

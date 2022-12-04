@@ -6,7 +6,7 @@ namespace AoC2022
 {
     public static class Helpers
     {
-        public static string DataPath = $"{Directory.GetCurrentDirectory()}\\Data";
+        public static string DataPath = $"{Directory.GetCurrentDirectory()}";
 
         public static string[] ReadInputFromDataFolder(string fileName, InputTypes inputTypes)
         {

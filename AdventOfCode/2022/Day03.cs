@@ -2,6 +2,7 @@
 using BenchmarkDotNet.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static AdventOfCode.Helpers;
 
 namespace AdventOfCode;
@@ -70,10 +71,28 @@ public class Day03 : ISolution
         return sum;
     }
 
-    //[Benchmark]
+    [Benchmark]
     public int PartTwo()
     {
-        throw new NotImplementedException();
+        var sum = 0;
+        for (int i = 0; i < _input.Length; i+=3)
+        {
+            var firstGroup = _input[i].ToCharArray();
+            var secondGroup = _input[i+1].ToCharArray();
+            var thirdGroup = _input[i+2].ToCharArray();
+
+            for(int j = 0; j < firstGroup.Length; j++)
+            {
+                if (secondGroup.Contains(firstGroup[j]) && thirdGroup.Contains(firstGroup[j]))
+                {
+                    sum += char.IsUpper(firstGroup[j]) ? (firstGroup[j]) - 38 : (firstGroup[j] - 96);
+                    break;
+                }
+            }             
+        }
+
+        return sum;
+
     }
 
     #endregion

@@ -42,7 +42,7 @@ internal static class Program
 
         var day3 = new Day03(inputType);
         Console.WriteLine($"Day 3 Part #1: {day3.PartOne()}");
-        //Console.WriteLine($"Day 3 Part #2: {day3.PartTwo()}");
+        Console.WriteLine($"Day 3 Part #2: {day3.PartTwo()}");
         Console.WriteLine("");
     }
 

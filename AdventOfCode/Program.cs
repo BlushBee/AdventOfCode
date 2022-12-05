@@ -28,21 +28,26 @@ internal static class Program
 
     private static void ShowAnswers(InputTypes inputType)
     {
-        var day1 = new Day01(inputType);
-        Console.WriteLine($"Day 1 Part #1: {day1.PartOne()}");
-        Console.WriteLine($"Day 1 Part #2: {day1.PartTwo()}");
+        var day01 = new Day01(inputType);
+        Console.WriteLine($"Day 1 Part #1: {day01.PartOne()}");
+        Console.WriteLine($"Day 1 Part #2: {day01.PartTwo()}");
         Console.WriteLine("");
 
-        var day2 = new Day02(inputType);
-        Console.WriteLine($"Day 2 Part #1: {day2.PartOne()}");
-        Console.WriteLine($"Day 2 Part #2: {day2.PartTwo()}");
-        Console.WriteLine($"Day 2 Part #1: {day2.PartOneOptimized()} (optimized)");
-        Console.WriteLine($"Day 2 Part #2: {day2.PartTwoOptimized()} (optimized)");
+        var day02 = new Day02(inputType);
+        Console.WriteLine($"Day 2 Part #1: {day02.PartOne()}");
+        Console.WriteLine($"Day 2 Part #2: {day02.PartTwo()}");
+        Console.WriteLine($"Day 2 Part #1: {day02.PartOneOptimized()} (optimized)");
+        Console.WriteLine($"Day 2 Part #2: {day02.PartTwoOptimized()} (optimized)");
         Console.WriteLine("");
 
-        var day3 = new Day03(inputType);
-        Console.WriteLine($"Day 3 Part #1: {day3.PartOne()}");
-        Console.WriteLine($"Day 3 Part #2: {day3.PartTwo()}");
+        var day03 = new Day03(inputType);
+        Console.WriteLine($"Day 3 Part #1: {day03.PartOne()}");
+        Console.WriteLine($"Day 3 Part #2: {day03.PartTwo()}");
+        Console.WriteLine("");
+
+        var day04 = new Day04(inputType);
+        Console.WriteLine($"Day 4 Part #1: {day04.PartOne()}");
+        Console.WriteLine($"Day 4 Part #2: {day04.PartTwo()}");
         Console.WriteLine("");
     }
 
@@ -50,8 +55,9 @@ internal static class Program
     {
         // var result = BenchmarkRunner.Run(typeof(Program).Assembly);
 
-        // _ = BenchmarkRunner.Run<Day1>();
+        // _ = BenchmarkRunner.Run<Day01>();
         // _ = BenchmarkRunner.Run<Day02>();
-        _ = BenchmarkRunner.Run<Day03>();
+        // _ = BenchmarkRunner.Run<Day03>();
+        _ = BenchmarkRunner.Run<Day04>();
     }
 }

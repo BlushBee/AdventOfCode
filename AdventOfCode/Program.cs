@@ -48,6 +48,7 @@ internal static class Program
         var day04 = new Day04(inputType);
         Console.WriteLine($"Day 4 Part #1: {day04.PartOne()}");
         Console.WriteLine($"Day 4 Part #2: {day04.PartTwo()}");
+        Console.WriteLine($"Day 4 Part #2: {day04.PartTwoOptimized()} (optimized)");
         Console.WriteLine("");
     }
 

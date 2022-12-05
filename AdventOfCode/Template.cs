@@ -39,4 +39,11 @@ public class Template : ISolution
     }
 
     #endregion
+
+
+    #region Optimized version
+
+    // when atempting to write an optimized version
+
+    #endregion
 }

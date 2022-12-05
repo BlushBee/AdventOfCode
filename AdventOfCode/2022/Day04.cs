@@ -63,32 +63,85 @@ public class Day04 : ISolution
         {
             var ids = _input[i].Split(',');
             var firstPair = ids[0].Split('-');
-            var secondPair = ids[1].Split('-');
-            var hasOverlap = false;
+            var secondPair = ids[1].Split('-');    
 
-            for (int j = int.Parse(firstPair[0]); j <= int.Parse(firstPair[1]); j++)
+            if (HasOverlap(int.Parse(firstPair[0]), int.Parse(firstPair[1]), int.Parse(secondPair[0]), int.Parse(secondPair[1])))
             {
-                for (int k = int.Parse(secondPair[0]); k <= int.Parse(secondPair[1]); k++)
-                {
-                    if (!hasOverlap && j == k)
-                    {
-                        hasOverlap = true;
-                        total++;
-                        break;
-                    }
-                }
-
-                if (hasOverlap)
-                {
-                    break;
-                }
+                total++;
             }
 
-            hasOverlap = false;
+            // made the below into it's own method.
+
+            // var hasOverlap = false;
+            //for (int j = int.Parse(firstPair[0]); j <= int.Parse(firstPair[1]); j++)
+            //{
+            //    for (int k = int.Parse(secondPair[0]); k <= int.Parse(secondPair[1]); k++)
+            //    {
+            //        if (!hasOverlap && j == k)
+            //        {
+            //            hasOverlap = true;
+            //            total++;
+            //            break;
+            //        }
+            //    }
+
+            //    if (hasOverlap)
+            //    {
+            //        break;
+            //    }
+            //}
+
+            //hasOverlap = false;
         }
 
         return total;
     }
+
+    public bool HasOverlap(int firstStartrange, int firstEndRange, int secondStartRange, int secondEndRange)
+    {
+        for (int j = firstStartrange; j <= firstEndRange ; j++)
+        {
+            for (int k = secondStartRange; k <= secondEndRange; k++)
+            {
+                if (j == k)
+                {
+                    return true;
+                }
+            }          
+        }
+
+        return false;
+    }
+
+    #endregion
+
+
+    #region Optimized version
+
+
+    // actually slower than my first version
+    // to do: write a more performant version
+    [Benchmark]
+    public int PartTwoOptimized()
+    {
+        var total = 0;
+        for (int i = 0; i < _input.Length; i++)
+        {
+            var ids = _input[i].Split(',');
+            var firstPair = ids[0].Split('-');
+            var secondPair = ids[1].Split('-');
+            var firstPairRange = Enumerable.Range(int.Parse(firstPair[0]), int.Parse(firstPair[1]) - int.Parse(firstPair[0])+1);
+            var secondPairRange = Enumerable.Range(int.Parse(secondPair[0]), int.Parse(secondPair[1]) - int.Parse(secondPair[0])+1);
+
+            if (firstPairRange.Intersect(secondPairRange).Any())
+            {
+                total++;
+            }
+        }
+
+        return total;
+    }
+
 
     #endregion
 }

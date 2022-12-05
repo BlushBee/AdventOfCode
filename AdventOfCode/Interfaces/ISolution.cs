@@ -1,9 +1,8 @@
-﻿namespace AoC2022.Interfaces
+﻿namespace AoC2022.Interfaces;
+
+public interface ISolution
 {
-    public interface ISolution
-    {
-        void ProcessInput();
-        int PartOne();
-        int PartTwo();
-    }
+    void ProcessInput();
+    int PartOne();
+    int PartTwo();
 }

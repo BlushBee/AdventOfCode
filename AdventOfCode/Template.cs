@@ -1,39 +1,42 @@
 ﻿using AoC2022.Interfaces;
 using BenchmarkDotNet.Attributes;
 using System;
-using static AoC2022.Helpers;
+using static AdventOfCode.Helpers;
 
-namespace AdventOfCode
+namespace AdventOfCode;
+
+// [MemoryDiagnoser]
+[SimpleJob]
+public class Template : ISolution
 {
-    // [MemoryDiagnoser]
-    // [SimpleJob]
-    internal class Template : ISolution
+    private readonly InputTypes _inputTypes;
+    private string[] _input;
+
+    public Template(InputTypes inputTypes = InputTypes.Full)
     {
-        private readonly InputTypes _inputTypes;
-        private string[] _input;
-
-        public Template(InputTypes inputTypes = InputTypes.Full)
-        {
-            _inputTypes = inputTypes;
-            ProcessInput();
-        }
-
-        [Benchmark]
-        public void ProcessInput()
-        {
-            _input = ReadInputFromDataFolder(@"2022\Input\Day1", _inputTypes);
-        }
-
-        [Benchmark]
-        public int PartOne()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Benchmark]
-        public int PartTwo()
-        {
-            throw new NotImplementedException();
-        }
+        _inputTypes = inputTypes;
+        ProcessInput();
     }
+
+    [Benchmark]
+    public void ProcessInput()
+    {
+        _input = ReadInputFromDataFolder(@"2022\Input\Day01", _inputTypes);
+    }
+
+    #region first version
+
+    [Benchmark]
+    public int PartOne()
+    {
+        throw new NotImplementedException();
+    }
+
+    [Benchmark]
+    public int PartTwo()
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
 }

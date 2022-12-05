@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
-    <StartupObject>AoC2022.Program</StartupObject>
+    <StartupObject>AdventOfCode.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,22 +12,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="2022\Input\Day1 ExampleInput.txt">
+    <None Update="2022\Input\Day01 ExampleInput.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="2022\Input\Day1 AlternativeInput.txt">
+    <None Update="2022\Input\Day01 AlternativeInput.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="2022\Input\Day2 ExampleInput.txt">
+    <None Update="2022\Input\Day03 Input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="2022\Input\Day2 AlternativeInput.txt">
+    <None Update="2022\Input\Day03 ExampleInput.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="2022\Input\Day2 Input.txt">
+    <None Update="2022\Input\Day02 ExampleInput.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="2022\Input\Day1 Input.txt">
+    <None Update="2022\Input\Day02 AlternativeInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="2022\Input\Day02 Input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="2022\Input\Day01 Input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

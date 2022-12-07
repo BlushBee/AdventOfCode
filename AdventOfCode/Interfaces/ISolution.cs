@@ -3,6 +3,6 @@
 public interface ISolution
 {
     void ProcessInput();
-    int PartOne();
-    int PartTwo();
+    string PartOne();
+    string PartTwo();
 }

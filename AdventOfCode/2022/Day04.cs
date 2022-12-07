@@ -29,7 +29,7 @@ public class Day04 : ISolution
     #region first version
 
     [Benchmark]
-    public int PartOne()
+    public string PartOne()
     {
         var total = 0;
         for (int i = 0; i < _input.Length; i++)
@@ -44,7 +44,7 @@ public class Day04 : ISolution
             }
         }
 
-        return total;
+        return total.ToString();
 
     }
 
@@ -56,9 +56,9 @@ public class Day04 : ISolution
     // 2-6,4-8 overlaps in sections 4, 5, and 6.
 
     [Benchmark]
-    public int PartTwo()
+    public string PartTwo()
     {
-        var total = 0;
+        var answer = 0;
         for (int i = 0; i < _input.Length; i++)
         {
             var ids = _input[i].Split(',');
@@ -67,7 +67,7 @@ public class Day04 : ISolution
 
             if (HasOverlap(int.Parse(firstPair[0]), int.Parse(firstPair[1]), int.Parse(secondPair[0]), int.Parse(secondPair[1])))
             {
-                total++;
+                answer++;
             }
 
             // made the below into it's own method.
@@ -94,16 +94,16 @@ public class Day04 : ISolution
             //hasOverlap = false;
         }
 
-        return total;
+        return answer.ToString();
     }
 
     public bool HasOverlap(int firstStartrange, int firstEndRange, int secondStartRange, int secondEndRange)
     {
-        for (int j = firstStartrange; j <= firstEndRange ; j++)
+        for (int i = firstStartrange; i <= firstEndRange ; i++)
         {
-            for (int k = secondStartRange; k <= secondEndRange; k++)
+            for (int j = secondStartRange; j <= secondEndRange; j++)
             {
-                if (j == k)
+                if (i == j)
                 {
                     return true;
                 }
@@ -124,7 +124,7 @@ public class Day04 : ISolution
     [Benchmark]
     public int PartTwoOptimized()
     {
-        var total = 0;
+        var answer = 0;
         for (int i = 0; i < _input.Length; i++)
         {
             var ids = _input[i].Split(',');
@@ -135,11 +135,11 @@ public class Day04 : ISolution
 
             if (firstPairRange.Intersect(secondPairRange).Any())
             {
-                total++;
+                answer++;
             }
         }
 
-        return total;
+        return answer;
     }
 
 

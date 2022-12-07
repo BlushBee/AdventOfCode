@@ -44,23 +44,23 @@ public class Day01 : ISolution
     #region first version
 
     [Benchmark]
-    public int PartOne()
+    public string PartOne()
     {
         var topX = 1;
         var topXCalories = GetTopElvesWithCalories(_elvesWithTotalCalories, topX);
-        var highestAmountOfCalories = GetTotalCalories(topXCalories);
+        var answer = GetTotalCalories(topXCalories);
 
-        return highestAmountOfCalories;
+        return answer.ToString();
     }
 
     [Benchmark]
-    public int PartTwo()
+    public string PartTwo()
     {
         var topX = 3;
         var topXCalories = GetTopElvesWithCalories(_elvesWithTotalCalories, topX);
-        var highestAmountOfCalories = GetTotalCalories(topXCalories);
+        var answer = GetTotalCalories(topXCalories);
 
-        return highestAmountOfCalories;
+        return answer.ToString();
     }
 
 

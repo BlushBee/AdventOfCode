@@ -27,13 +27,13 @@ public class Template : ISolution
     #region first version
 
     [Benchmark]
-    public int PartOne()
+    public string PartOne()
     {
         throw new NotImplementedException();
     }
 
     [Benchmark]
-    public int PartTwo()
+    public string PartTwo()
     {
         throw new NotImplementedException();
     }

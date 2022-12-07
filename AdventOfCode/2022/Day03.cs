@@ -37,7 +37,7 @@ public class Day03 : ISolution
     // CrZsJsPPZsGzwwsLwLmpwMDw
 
     [Benchmark]
-    public int PartOne()
+    public string PartOne()
     {
         for (int i = 0; i < _input.Length; i++)
         {
@@ -52,7 +52,7 @@ public class Day03 : ISolution
             }
         }
 
-        var sum = 0;
+        var answer = 0;
 
         foreach (var rucksack in _rucksacks)
         {
@@ -61,20 +61,20 @@ public class Day03 : ISolution
             {
                 if (rucksack.Value.Contains(firstItem[i]))
                 {
-                    sum += char.IsUpper(firstItem[i]) ? (firstItem[i]) - 38 : (firstItem[i] - 96);
+                    answer += char.IsUpper(firstItem[i]) ? (firstItem[i]) - 38 : (firstItem[i] - 96);
 
                     break;
                 }
             }
         }
 
-        return sum;
+        return answer.ToString();
     }
 
     [Benchmark]
-    public int PartTwo()
+    public string PartTwo()
     {
-        var sum = 0;
+        var answer = 0;
         for (int i = 0; i < _input.Length; i+=3)
         {
             var firstGroup = _input[i].ToCharArray();
@@ -85,13 +85,13 @@ public class Day03 : ISolution
             {
                 if (secondGroup.Contains(firstGroup[j]) && thirdGroup.Contains(firstGroup[j]))
                 {
-                    sum += char.IsUpper(firstGroup[j]) ? (firstGroup[j]) - 38 : (firstGroup[j] - 96);
+                    answer += char.IsUpper(firstGroup[j]) ? (firstGroup[j]) - 38 : (firstGroup[j] - 96);
                     break;
                 }
             }             
         }
 
-        return sum;
+        return answer.ToString();
 
     }
 

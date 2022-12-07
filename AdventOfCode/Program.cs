@@ -50,6 +50,11 @@ internal static class Program
         Console.WriteLine($"Day 4 Part #2: {day04.PartTwo()}");
         Console.WriteLine($"Day 4 Part #2: {day04.PartTwoOptimized()} (optimized)");
         Console.WriteLine("");
+
+        var day05 = new Day05(inputType);
+        Console.WriteLine($"Day 5 Part #1: {day05.PartOne()}");
+        Console.WriteLine($"Day 5 Part #2: {day05.PartTwo()}"); 
+        Console.WriteLine("");
     }
 
     private static void RunBenchmarks()

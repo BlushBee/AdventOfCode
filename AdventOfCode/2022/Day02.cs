@@ -27,7 +27,7 @@ public class Day02 : ISolution
     #region first version
 
     [Benchmark]
-    public int PartOne()
+    public string PartOne()
     {
         var score = 0;
         for (int i = 0; i < _input.Length; i++)
@@ -38,11 +38,11 @@ public class Day02 : ISolution
             score += GetRoundScore(opponentPick, playerPick, GameType.Normal);
         }
 
-        return score;
+        return score.ToString();
     }
 
     [Benchmark]
-    public int PartTwo()
+    public string PartTwo()
     {
         var score = 0;
         for (int i = 0; i < _input.Length; i++)
@@ -53,7 +53,7 @@ public class Day02 : ISolution
             score += GetRoundScore(opponentPick, playerPick, GameType.Fixed);
         }
 
-        return score;
+        return score.ToString();
     }
 
     private int GetRoundScore(Hand opponent, Hand player, GameType gameType)
@@ -206,27 +206,27 @@ public class Day02 : ISolution
     #region Optimized version
 
     [Benchmark]
-    public int PartOneOptimized()
+    public string PartOneOptimized()
     {
-        var score = 0;
+        var answer = 0;
         for (int i = 0; i < _input.Length; i++)
         {
-            score += GetRoundScoreOptimized(_input[i]);
+            answer += GetRoundScoreOptimized(_input[i]);
         }
 
-        return score;
+        return answer.ToString();
     }
 
     [Benchmark]
-    public int PartTwoOptimized()
+    public string PartTwoOptimized()
     {
-        var score = 0;
+        var answer = 0;
         for (int i = 0; i < _input.Length; i++)
         {
-            score += GetRoundScoreFixedOutcomeOptimzed(_input[i]);
+            answer += GetRoundScoreFixedOutcomeOptimzed(_input[i]);
         }
 
-        return score;
+        return answer.ToString();
     }
 
     // note: can be further optimized by precalculating the total points -> pick + outcome

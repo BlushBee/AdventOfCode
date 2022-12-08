@@ -30,21 +30,21 @@ public class Day06 : ISolution
     public string PartOne()
     {
         var amountOfUniqueChars = 4;
-        var answer = GetRangeOfUniqueCharacters(amountOfUniqueChars);
+        var answer = GetAmountOfCharactersAfterFirstMarker(amountOfUniqueChars);
 
         return answer;
     }
 
     [Benchmark]
     public string PartTwo()
-    {     
+    {
         var amountOfUniqueChars = 14;
-        var answer = GetRangeOfUniqueCharacters(amountOfUniqueChars);
+        var answer = GetAmountOfCharactersAfterFirstMarker(amountOfUniqueChars);
 
         return answer;
     }
 
-    public string GetRangeOfUniqueCharacters(int amountOfUniqueChars)
+    public string GetAmountOfCharactersAfterFirstMarker(int amountOfUniqueChars)
     {
         var currentCharacters = new string[amountOfUniqueChars];
 
@@ -65,6 +65,7 @@ public class Day06 : ISolution
 
         return "N/A";
     }
+
     #endregion
 
 

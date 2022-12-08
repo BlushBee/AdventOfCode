@@ -1,7 +1,5 @@
 ﻿using AoC2022.Interfaces;
 using BenchmarkDotNet.Attributes;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using static AdventOfCode.Helpers;
 
@@ -23,7 +21,7 @@ public class Day04 : ISolution
     [Benchmark]
     public void ProcessInput()
     {
-        _input = ReadInputFromDataFolder(@"2022\Input\Day04", _inputTypes);
+        _input = ReadInputAsStringArrayFromDataFolder(@"2022\Input\Day04", _inputTypes);
     }
 
     #region first version

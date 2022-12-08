@@ -21,7 +21,7 @@ public class Day02 : ISolution
     [Benchmark]
     public void ProcessInput()
     {
-        _input = ReadInputFromDataFolder(@"2022\Input\Day02", _inputTypes);
+        _input = ReadInputAsStringArrayFromDataFolder(@"2022\Input\Day02", _inputTypes);
     }
 
     #region first version

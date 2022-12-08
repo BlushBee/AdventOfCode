@@ -55,6 +55,11 @@ internal static class Program
         Console.WriteLine($"Day 5 Part #1: {day05.PartOne()}");
         Console.WriteLine($"Day 5 Part #2: {day05.PartTwo()}"); 
         Console.WriteLine("");
+
+        var day06 = new Day06(inputType);
+        Console.WriteLine($"Day 6 Part #1: {day06.PartOne()}");
+        Console.WriteLine($"Day 6 Part #2: {day06.PartTwo()}");
+        Console.WriteLine("");
     }
 
     private static void RunBenchmarks()
@@ -64,6 +69,7 @@ internal static class Program
         // _ = BenchmarkRunner.Run<Day01>();
         // _ = BenchmarkRunner.Run<Day02>();
         // _ = BenchmarkRunner.Run<Day03>();
-        _ = BenchmarkRunner.Run<Day04>();
+        // _ = BenchmarkRunner.Run<Day04>();
+        _ = BenchmarkRunner.Run<Day05>();
     }
 }

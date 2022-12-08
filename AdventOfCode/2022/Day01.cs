@@ -23,7 +23,7 @@ public class Day01 : ISolution
     [Benchmark]
     public void ProcessInput()
     {
-        _input = ReadInputFromDataFolder(@"2022\Input\Day01", _inputTypes);
+        _input = ReadInputAsStringArrayFromDataFolder(@"2022\Input\Day01", _inputTypes);
         int total = 0;
 
         for (int i = 0; i < _input.Length; i++)
